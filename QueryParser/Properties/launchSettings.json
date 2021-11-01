@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "QueryParser": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\gitRepo\\QueryParser\\QueryParserUnitTest\\sqlquery.json"
+    }
+  }
+}

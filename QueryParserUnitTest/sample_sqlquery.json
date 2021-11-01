@@ -1,0 +1,121 @@
+[
+    {
+        "query_type": "select",
+        "query_parameters": {
+            "display_columns": [
+                {
+                    "column_name": "SUM(st.population)",
+                    "column_type": "name",
+                    "alias": "Total Population"
+                },
+                {
+                    "column_name": "at.city",
+                    "column_type": "string",
+                    "alias": "City"
+                },
+                {
+                    "column_name": "at.Country",
+                    "column_type": "string",
+                    "alias": "Country"
+                }
+            ],
+            "data_source": {
+                "source_table": {
+                    "table_name": "sometable",
+                    "alias": "st"
+                },
+                "joins": [
+                    {
+                        "join_type": "inner_join",
+                        "join_source": {
+                            "table_name": "anothertable",
+                            "alias": "at"
+                        },
+                        "join_condition": {
+                            "left_expression": {
+                                "parent_table": "st",
+                                "column_name": "city_id",
+                                "column_type": "name"
+                            },
+                            "right_expression": {
+                                "parent_table": "at",
+                                "column_name": "id",
+                                "column_type": "name"
+                            },
+                            "operator": "EQUALS"
+                        }
+                    }
+                ]
+            },
+            "filter": {
+                "left_expression": {
+                    "field": {
+                        "parent_table": "at",
+                        "column_name": "city",
+                        "column_type": "name"
+                    },
+                    "value_literal": "New York",
+                    "value_type": "literal_string",
+                    "operator": "NOT_EQUALS"
+                },
+                "operator": "AND",
+                "right_expression": {
+                    "left_expression": {
+                        "field": {
+                            "parent_table": "st",
+                            "column_name": "population",
+                            "column_type": "name"
+                        },
+                        "value_literal": "10000",
+                        "value_type": "literal_number",
+                        "operator": "GREATER_THAN"
+                    }
+                }
+            },
+            "aggregation": {
+                "groupby": [
+                    {
+                        "parent_table": "at",
+                        "column_name": "country",
+                        "column_type": "name"
+                    },
+                    {
+                        "parent_table": "at",
+                        "column_name": "city",
+                        "column_type": "name"
+                    }
+                ],
+                "group_filters": {
+                    "left_expression": {
+                        "field": {
+                            "column_name": "Total Population",
+                            "column_type": "string"
+                        },
+                        "value_literal": "100000",
+                        "value_type": "literal_number",
+                        "operator": "GREATER_THAN"
+                    }
+                }
+            },
+            "order_parameters": {
+                "ordering_columns": [
+                    {
+                        "column_name": {
+                            "parent_table": "at",
+                            "column_name": "country",
+                            "column_type": "name"
+                        },
+                        "sort_order": "ascending"
+                    },{
+                        "column_name": {
+                            "parent_table": "st",
+                            "column_name": "population",
+                            "column_type": "name"
+                        },
+                        "sort_order": "descending"
+                    }
+                ]
+            }
+        }
+    }
+]
