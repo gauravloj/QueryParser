@@ -11,7 +11,7 @@ This console application converts JSON sql query input to SQL query string.
 2. run "dotnet test"
 
 ## Input file format
-Input file is a JSON file with below format
+Input file is a JSON file with below format. Sample file can be found at [sample_sqlquery.json](https://github.com/gauravloj/QueryParser/blob/main/QueryParserUnitTest/sample_sqlquery.json)
 1. Input is an array of Query objects
 2. Query object:
 	- query_type : one of SELECT, CREATE, UPDATE, ALTER, DROP (Only select command is implemented for now. Other commands will be supported later)
